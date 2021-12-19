@@ -1,11 +1,3 @@
-"""
-Tetris-race system implemented by Ivan Gushchin
-Environment, realizing the agent's behavior in the world, similar to the classic Tetris race
-with the presence of a machine (agent) and walls (obstacles). The agent's goal is to reach the end,
-avoiding collisions. Agent has two options to do - make left move of right move to avoid collision.
-"""
-# TO DO: future release - provide more agent' options
-
 import logging
 import math
 import gym
@@ -15,9 +7,9 @@ from gym.utils import seeding
 import numpy as np
 import time
 import pickle
-#import distutils
 
 logger = logging.getLogger(__name__)
+
 
 class TetrisRaceEnv(gym.Env):
     metadata = {
@@ -25,7 +17,7 @@ class TetrisRaceEnv(gym.Env):
         'video.frames_per_second': 50
     }
 
-    def __init__(self, walls_num = 60, walls_spread = 5, episodes_to_run = 30,
+    def __init__(self, walls_num = 60, walls_spread = 5, episodes_to_run = 120,
                  world_type = 'Fat',smooth_car_step = 5, level_difficulty ='Easy', car_spawn = 'Random'):
         super(TetrisRaceEnv, self).__init__()
     # unmutable gui var
@@ -203,7 +195,7 @@ class TetrisRaceEnv(gym.Env):
                     block_xe.append(tmp[1])
 
                 if side_flag and CR in block_xs or CR in block_xe or CL in block_xs or CL in block_xe:
-                    # to do: rewrite side crash handler in future releases
+                    # TODO: rewrite side crash handler in future releases
                     side_flag = False
                     self.pass_wall = False
                     self.pass_count = 0
@@ -420,9 +412,3 @@ class TetrisRaceEnv(gym.Env):
 
 
         return self.viewer.render(return_rgb_array=mode == 'rgb_array')
-
-
-
-
-
-
